@@ -12,12 +12,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
 application {
     mainClass = 'Main'
+    applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
 }
 
 java {
@@ -29,9 +30,20 @@ test {
     useJUnitPlatform()
 }
 
+// Fat JAR — без конфликта
 shadowJar {
     archiveClassifier = ''
     manifest {
         attributes 'Main-Class': 'Main'
     }
+}
+
+// Отключаем startScripts — он не нужен для fat JAR
+startScripts {
+    enabled = false
+}
+
+// Убираем обычный jar — только shadowJar
+jar {
+    enabled = false
 }
