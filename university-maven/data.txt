@@ -1,0 +1,3 @@
+# Курсы и студенты
+COURSE,1,Math
+STUDENT,sdas,1,1
